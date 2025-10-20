@@ -7,7 +7,6 @@ namespace ExpenseTracker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("=== Трекер расходов ===");
 
             int operationsCount = GetOperationsCount();
 
@@ -99,33 +98,64 @@ namespace ExpenseTracker
                         Console.WriteLine("До свидания!");
                         return;
                     default:
-                        Console.WriteLine("Неверный выбор! Попробуйте снова");
+                        Console.WriteLine("Неверный выбор! Попробуйте снова.");
                         break;
                 }
             }
         }
         static void ShowExpenses(List<Expense> expenses)
         {
-            Console.WriteLine("Пока на реализации!");
+            Console.Clear();
+            for (int i = 0; i < expenses.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {expenses[i].Name} - {expenses[i].Amount} руб.");
+            }
         }
 
         static void ShowStatistics(List<Expense> expenses)
         {
-            Console.WriteLine("Пока на реализации!");
+            Console.Clear();
+            if (expenses.Count == 0)
+            {
+                Console.WriteLine("Нет данных для статистики");
+                return;
+            }
+
+            decimal total = 0;
+            decimal max = expenses[0].Amount;
+            decimal min = expenses[0].Amount;
+
+
+            foreach (var expense in expenses)
+            {
+                total += expense.Amount;
+                if (expense.Amount > max) max = expense.Amount;
+                if (expense.Amount < min) min = expense.Amount;
+            }
+
+            decimal average = total / expenses.Count;
+
+            Console.Clear();
+            Console.WriteLine($"Общая сумма: {total} руб.");
+            Console.WriteLine($"Средняя трата: {average:F2} руб.");
+            Console.WriteLine($"Максимальная трата: {max} руб.");
+            Console.WriteLine($"Минимальная трата: {min} руб.");
         }
         static void SortExpenses(List<Expense> expenses)
         {
+            Console.Clear();
             Console.WriteLine("Пока на реализации!");
         }
         static void ConvertCurrency(List<Expense> expenses)
         {
+            Console.Clear();
             Console.WriteLine("Пока на реализации!");
         }
         static void SearchExpenses(List<Expense> expenses)
         {
+            Console.Clear();
             Console.WriteLine("Пока на реализации!");
         }
-
     }
 
     class Expense
